@@ -3,11 +3,12 @@ import 'dart:math';
 class Person {
   String name;
   int weighting;
+  bool selected; 
 
-  Person(this.name, this.weighting);
+  Person(this.name, this.weighting) : selected = false; 
 }
 
-class Randomgenerator { // Änderung des Klassennamens
+class Zufallsgenerator {
   List<Person> personList = [
     Person("Laura", 3),
     Person("Sophie", 2),
@@ -25,7 +26,7 @@ class Randomgenerator { // Änderung des Klassennamens
     List<Person> availablePeople = [];
 
     for (var person in personList) {
-      if (!person.name.startsWith("*")) {
+      if (!person.selected) {
         availablePeople.add(person);
       }
     }
@@ -37,15 +38,15 @@ class Randomgenerator { // Änderung des Klassennamens
 
     int randomIndex = Random().nextInt(availablePeople.length);
     Person selectedPerson = availablePeople[randomIndex];
-    selectedPerson.name = "*" + selectedPerson.name;
+    selectedPerson.selected = true; 
     return selectedPerson;
   }
 }
 
 void main() {
-  Randomgenerator randomgenerator = Randomgenerator();
+  Zufallsgenerator randomgenerator = Zufallsgenerator();
   Person? person = randomgenerator.random();
   if (person != null) {
-    print(person.name.substring(1));
+    print(person.name);
   }
 }
